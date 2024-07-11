@@ -59,8 +59,14 @@ export default function svelteHyperLazyPlugin(): Plugin<any> {
             // * Minimal dependency approach
             const srcDir = join(dir, "src");
             const svelteFiles = checkDir(srcDir);
-            console.log(svelteFiles)
-            svelteSyntaxParser(svelteFiles[0]);
+
+            // Check <HyperLazy/> attribute is calling to existing file name
+            for (const file of svelteFiles) {
+                const svelteHlazyTag = svelteSyntaxParser(svelteFiles[0]);
+                for (const hlazy of svelteHlazyTag) {
+                    // TODO: Define attribute which will call to filename first
+                }
+            }
 
             
             console.log("Build finished!")
