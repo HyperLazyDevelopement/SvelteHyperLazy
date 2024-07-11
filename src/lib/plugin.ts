@@ -1,10 +1,22 @@
 import { type Plugin, normalizePath } from "vite";
-import { readdirSync, lstatSync } from "fs";
+import { readdirSync, lstatSync, readFileSync } from "fs";
 import { join, extname } from "path";
+import { type HTMLElement, parse } from "node-html-parser";
 
 type SvelteFilesList = string[]
 
 // TODO: Check syntax by svelte syntax parser as function
+/**
+ * @param {string} filePath - the absolute location of svelte file
+ * Returns svelte file as abst
+*/
+export function svelteSyntaxParser(filePath: string, encoding: BufferEncoding = "utf-8"): HTMLElement[] {
+    const fileContent = readFileSync(filePath)
+        .toString(encoding)
+    const htmlParsed = parse(fileContent);
+
+    return htmlParsed.getElementsByTagName("HyperLazy");
+}
 
 /**
  * Checks all units under path under condition if is:
@@ -14,7 +26,7 @@ type SvelteFilesList = string[]
  * Returns each encountered Svelte file as array with path to it
  * @param pathToCheck - Location which you'd like to check
  */
-function checkDir(pathToCheck: string): SvelteFilesList {
+export function checkDir(pathToCheck: string): SvelteFilesList {
     const srcDir = readdirSync(pathToCheck);
     let filesList: SvelteFilesList = []
 
@@ -47,7 +59,14 @@ export default function svelteHyperLazyPlugin(): Plugin<any> {
             // * Minimal dependency approach
             const srcDir = join(dir, "src");
             const svelteFiles = checkDir(srcDir);
-            console.log(svelteFiles)
+
+            // Check <HyperLazy/> attribute is calling to existing file name
+            for (const file of svelteFiles) {
+                const svelteHlazyTag = svelteSyntaxParser(svelteFiles[0]);
+                for (const hlazy of svelteHlazyTag) {
+                    // TODO: Define attribute which will call to filename first
+                }
+            }
 
             
             console.log("Build finished!")

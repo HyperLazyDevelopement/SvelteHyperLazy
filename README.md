@@ -1,28 +1,19 @@
 # SvelteHyperLazy
-Is a enhanced lazy load package desired for Svelte; Allow lazy load images and videos
+A **SEO** and **UX** improving package desired for **Svelte**; Allow to lazy load every html content semlessly regardless to initial page open
 
-# Worth to note!
-I'm seeking a volountiers to help me in leading this project to finish. When you're brave, strong, remarkable programmer you can contact with me here: [Short Application](https://forms.gle/QRjhGXnq4CuDE4P48)
+## Keynote
+"Load what is important first, rest after"
 
-## Points for use our solution
-1. Allows to use Lazy Loading for images and videos
-2. Has option to add **base image** which should be a smaller image displaying before full version had loaded
+## Explaination
+Every page content is load to viewport before whole page has been successfully loaded. Such behaviour result in:
+1. Greatfull initial page load time what directly impact **SEO**,
+2. **SEO** - your page has worst loading times than your comps
+3. **UX** - Not loaded e.g: fonts before user see page content
 
+### So?
+By our package you can improve: **SEO**, **UX** due to: Every page element is attach to, in defined by you order after page has been loaded. The ___order___ is a startegy which you predefine durning developement stage and this can be:
+* every - every element is attached to your page after intial load has finished
+* spill - element is shown when user see on screen an anchor (replacement element on the same spot with lowwer size - by default indicate loading),
+* clay - element is shown when user see on screen prior element; You specify which element it's
 
-## **Developement stage assumptions sorted by pitches**
-
-### **Information:** We are decent so we're gaining each level in descending order  (From Basic to Advanced)
-
-***Basic*** (Achieved)
-1. Show empty element until base element won't be attached
-2. Load full element only when user is seeing an element
-
-***Medium***
-1. Add option to load all images from page after basic form page will be downloaded
-
-***Advanced***
-<br>
-...Research of demands in progress. Stay curious and look 👀!!!
-
-## ROAD MAP
-1st: All 
+**Anecdote:** The whole working behaviour can be copmared to **atomic skytower on damp field**, to be on 2nd pitch you need to be on 1st pitch first, thereby to reduce weight momentum in **atomic tower** 2nd pitch is built after visited 1st pitch, in such a manner reducing likeness of collapse under the ground -> this is how **SvelteHyperLazy** works
